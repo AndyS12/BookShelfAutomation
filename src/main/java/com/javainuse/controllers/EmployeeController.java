@@ -242,5 +242,20 @@ public class EmployeeController {
         } 
  
     } 
+	
+	 @RequestMapping("/booktable") 
+    public ModelAndView showbooks_admin(HttpServletRequest request) { 
+        Object s = request.getSession().getAttribute("adminsession_id"); 
+        System.out.println(s); 
+        if (s == null) { 
+            return new ModelAndView("adminlogin", "adm", new Admin()); 
+        } else { 
+            ModelAndView mv = new ModelAndView("booktable"); 
+            List<Book> book = bookService.getAllBooks(); 
+            mv.addObject("book_list", book); 
+            return mv; 
+        } 
+    } 
+ 
 
 	}
