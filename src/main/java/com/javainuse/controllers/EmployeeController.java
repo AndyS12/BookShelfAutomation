@@ -228,5 +228,19 @@ public class EmployeeController {
         mv.addObject("BookId", bookId); 
         return mv; 
     } 
+	@RequestMapping("/employeetable") 
+    public ModelAndView showemployee(HttpServletRequest request) { 
+        Object s = request.getSession().getAttribute("adminsession_id"); 
+        System.out.println(s); 
+        if (s == null) { 
+            return new ModelAndView("adminlogin", "adm", new Admin()); 
+        } else { 
+            ModelAndView mv = new ModelAndView("employeetable"); 
+            List<Employee> employee = employeeService.getAllEmployees(); 
+            mv.addObject("employee_list", employee); 
+            return mv; 
+        } 
+ 
+    } 
 
 	}
